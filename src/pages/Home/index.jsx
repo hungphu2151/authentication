@@ -33,7 +33,7 @@ function Home() {
             alert("Đăng xuất thành công");
             if(response.data.success){
                 AuthService.logout();
-                window.location.reload();
+                navigate('/');
             }
         } catch (error) {
             alert("Đăng xuất thất bại");
@@ -81,11 +81,11 @@ function Home() {
           });
       };*/
 
-      useEffect(() => {
+      /*useEffect(() => {
         if (!AuthService.isLoggedIn()) {
             navigate('/');
           }
-      }, []);
+      }, []);*/
 
     return <div className='card'>
                 <div>
