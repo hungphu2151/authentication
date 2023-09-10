@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { useNavigate  } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { sendAccessToken } from '../../services/Api.jsx'
 import AuthService from '../../services/AuthService.jsx';
 
 
 function Home() {
+    const navigate  = useNavigate();
     const { state } = useLocation();
     const [responseMessage, setResponseMessage] = useState('');
     const [token, setToken] = useState(state.data.token);
@@ -79,15 +81,11 @@ function Home() {
           });
       };*/
 
-      /*useEffect(() => {
+      useEffect(() => {
         if (!AuthService.isLoggedIn()) {
-            console.log('chưa đăng nhập');
-          } else {
-            // Kiểm tra trạng thái đăng nhập và làm mới token sau khi làm mới trang
-            refreshToken();
-            console.log('đã đăng nhập');
+            navigate('/');
           }
-      }, []);*/
+      }, []);
 
     return <div className='card'>
                 <div>
@@ -106,7 +104,6 @@ function Home() {
                 <div style={{padding:20}}>
                     <div className="heading1">Home</div>
                     <br />
-                    {AuthService.isLoggedIn() ? (
                         <p>
                             <button className="btn" onClick={handleTest}>Test api</button>
                             <div>{responseMessage}</div>
@@ -114,9 +111,6 @@ function Home() {
                             <br />
                             <p><button className='btn_logout' onClick={handleLogout}>Đăng xuất</button></p>
                         </p>
-                    ) : (
-                        <div>Bạn chưa đăng nhập.</div>
-                    )}
                 </div>
             </div>;
 }
