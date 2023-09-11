@@ -57,7 +57,15 @@ function Home() {
         return () => {
           window.removeEventListener('beforeunload', refreshToken());
         };
-        //console.log(AuthService.isLoggedIn())
+        
+      }, []);
+
+      useEffect(() => {
+        const intervalId = setInterval(() => {
+          window.location.reload();
+        }, 30000);
+    
+        return () => clearInterval(intervalId);
       }, []);
 
     return <div className='card'>
@@ -80,7 +88,6 @@ function Home() {
                         <p>
                             <button className="btn" onClick={handleTest}>Test api</button>
                             <div>{responseMessage}</div>
-                            <button className="btn" onClick={refreshToken}>Refresh</button>
                             <br />
                             <p><button className='btn_logout' onClick={handleLogout}>Đăng xuất</button></p>
                         </p>
