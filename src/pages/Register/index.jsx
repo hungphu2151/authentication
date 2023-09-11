@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useNavigate  } from 'react-router-dom';
 import '../../App.css'
 
 function Register() {
+
+    const navigate  = useNavigate();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -20,8 +23,9 @@ function Register() {
         e.preventDefault();
         try {
             await axios.post('https://auth-server-fmp.vercel.app/auth/register', formData);
-          //console.log('Đăng ký thành công', response.data);
-          alert("Đăng ký thành công");
+            //console.log('Đăng ký thành công', response.data);
+            alert("Đăng ký thành công");
+            navigate('/');
         } catch (error) {
             alert("Đăng ký thất bại");
             //console.error('Đăng ký thất bại', error);
@@ -29,7 +33,6 @@ function Register() {
         }
       };
     
-
     return <div className='card'>
                 <div>
                     <nav>
