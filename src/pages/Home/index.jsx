@@ -16,7 +16,6 @@ function Home() {
     const handleTest = async (e) => {
         e.preventDefault();
         try {
-            //console.log(state.data);
             const response = await sendAccessToken(token);
             setResponseMessage(`API Response: ${response.data.message}`);
             console.log(token)
@@ -53,12 +52,12 @@ function Home() {
       };
 
       useEffect(() => {
-        /*window.addEventListener('beforeunload', refreshToken());
+        window.addEventListener('beforeunload', refreshToken());
     
         return () => {
           window.removeEventListener('beforeunload', refreshToken());
-        };*/
-        console.log(AuthService.isLoggedIn())
+        };
+        //console.log(AuthService.isLoggedIn())
       }, []);
 
     return <div className='card'>

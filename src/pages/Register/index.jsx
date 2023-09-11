@@ -29,7 +29,6 @@ function Register() {
         } catch (error) {
             alert("Đăng ký thất bại");
             //console.error('Đăng ký thất bại', error);
-            //console.log(formData)
         }
       };
     

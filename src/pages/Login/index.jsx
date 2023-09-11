@@ -25,12 +25,6 @@ function Login() {
             const response = await axios.post('https://auth-server-fmp.vercel.app/auth/login', formData, {withCredentials: true});
             alert('Đăng nhập thành công');
             //console.log('Đăng nhập thành công', response.data);
-            //const cookies = response.headers['set-cookie'];
-            //console.log('Cookies:', cookies);
-            //console.log(document.cookie)
-            //console.log(formData)
-            //const cookieValue = Cookies.get();
-            //console.log('CookieValue:', cookieValue);
             AuthService.login();
             if(response.data.success)
             {navigate('/home', { state: { data: response.data.data  } });}
