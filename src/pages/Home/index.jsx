@@ -19,6 +19,7 @@ function Home() {
             //console.log(state.data);
             const response = await sendAccessToken(token);
             setResponseMessage(`API Response: ${response.data.message}`);
+            console.log(token)
         } catch (error) {
             console.error('Error sending AccessToken:', error);
             setResponseMessage('Error sending AccessToken');
@@ -41,51 +42,24 @@ function Home() {
         }
       };
 
-      const refreshToken = async (e) => {
-        e.preventDefault();
+      const refreshToken = async () => {
+        //e.preventDefault();
         try {
-            const response = await axios.post('https://auth-server-fmp.vercel.app/auth/refresh-token');
+            const response = await axios.post('https://auth-server-fmp.vercel.app/auth/refresh-token', {}, {withCredentials: true});
             console.log('Refresh thành công', response.data);
+            setToken(response.data.data.token);
         } catch (error) {
             console.error('Lỗi khi làm mới token:', error);            
         }
       };
 
-      /*const refreshToken = async (e) => {
-        e.preventDefault();
-        try {
-            console.log(state.data.token)
-            const response = await axios.post('https://auth-server-fmp.vercel.app/auth/refresh-token');
-            console.log('Refresh thành công', response.data);
-            //setToken(response.data.data.token);
-        } catch (error) {
-            //alert('Lỗi khi làm mới token:');
-            //AuthService.logout();
-            //window.location.reload();
-            console.error('Lỗi khi làm mới token:', error);
-            console.log(token)             
-        }
-      };*/
-
-      /*const refreshToken = () => {
-        axios.post('https://auth-server-fmp.vercel.app/auth/refresh-token')
-          .then((response) => {
-            console.log('Refresh thành công', response.data);
-            //setToken(response.data.data.token);
-          })
-          .catch((error) => {
-            console.error('Lỗi khi làm mới token:', error);
-            console.log(token)
-            //AuthService.logout();
-            //window.location.reload();
-          });
-      };*/
-
-      /*useEffect(() => {
-        if (!AuthService.isLoggedIn()) {
-            navigate('/');
-          }
-      }, []);*/
+      useEffect(() => {
+        window.addEventListener('beforeunload', refreshToken());
+    
+        return () => {
+          window.removeEventListener('beforeunload', refreshToken());
+        };
+      }, []);
 
     return <div className='card'>
                 <div>
