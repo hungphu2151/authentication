@@ -43,6 +43,6 @@ button{
 
 .card{
   border: solid 1px;
-  min-height: 480px;
+  min-height: 500px;
   min-width: 400px;
 }

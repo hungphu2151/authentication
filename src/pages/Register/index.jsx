@@ -6,14 +6,16 @@ import '../../App.css'
 
 function Register() {
 
-    const navigate  = useNavigate();
+        const navigate  = useNavigate();
 
-    const [formData, setFormData] = useState({
-        email: '',
-        fullName: '',
-        password: '',
-      });
+        const [formData, setFormData] = useState({
+            email: '',
+            fullName: '',
+            password: '',
+        });
     
+      const [passwordMismatch, setPasswordMismatch] = useState('');
+
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -21,6 +23,10 @@ function Register() {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
+        if (formData.password !== formData.confirmPassword) {
+            setPasswordMismatch('Mật khẩu và xác nhận mật khẩu không khớp.');
+            return;
+          }
         try {
             await axios.post('https://auth-server-fmp.vercel.app/auth/register', formData);
             //console.log('Đăng ký thành công', response.data);
@@ -88,6 +94,21 @@ function Register() {
                                 onChange={handleChange}
                             />
                         </p>
+
+                        <div>
+                            <label htmlFor="confirmPassword">Xác nhận mật khẩu:</label>
+                        </div>
+                            <p>
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                />
+                            </p>
+                        
+                            <div style={{ color: 'red' }}>{passwordMismatch}</div> {/* Hiển thị thông báo mật khẩu không khớp */}
 
                         <div><button className='btn' onClick={handleSubmit}>Đăng ký</button></div>
                     </>
