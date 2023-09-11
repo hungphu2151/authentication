@@ -43,7 +43,6 @@ function Home() {
       };
 
       const refreshToken = async () => {
-        //e.preventDefault();
         try {
             const response = await axios.post('https://auth-server-fmp.vercel.app/auth/refresh-token', {}, {withCredentials: true});
             console.log('Refresh thành công', response.data);
@@ -54,11 +53,12 @@ function Home() {
       };
 
       useEffect(() => {
-        window.addEventListener('beforeunload', refreshToken());
+        /*window.addEventListener('beforeunload', refreshToken());
     
         return () => {
           window.removeEventListener('beforeunload', refreshToken());
-        };
+        };*/
+        console.log(AuthService.isLoggedIn())
       }, []);
 
     return <div className='card'>

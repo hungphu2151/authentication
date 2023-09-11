@@ -23,8 +23,8 @@ function Login() {
         e.preventDefault();
         try {
             const response = await axios.post('https://auth-server-fmp.vercel.app/auth/login', formData, {withCredentials: true});
-            //alert('Đăng nhập thành công');
-            console.log('Đăng nhập thành công', response.data);
+            alert('Đăng nhập thành công');
+            //console.log('Đăng nhập thành công', response.data);
             //const cookies = response.headers['set-cookie'];
             //console.log('Cookies:', cookies);
             //console.log(document.cookie)
